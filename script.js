@@ -18,12 +18,12 @@ function displayCityWeather(){
 
     console.log(queryURL);
 
-    // Here we run our AJAX call to the OpenWeatherMap API
+    //OpenWeatherMap API
     $.ajax({
       url: queryURL,
       method: "GET",
     
-      // We store all of the retrieved data inside of an object called "response"
+      // Using success to dictate the order of AJAX calls
       success: function(response) {
 
         // Log the resulting object
@@ -52,9 +52,7 @@ function displayCityWeather(){
         console.log("Humidity: " + response.main.humidity) + "%";
         console.log("Temperature (F): " + tempF);
       
-//     }
-// function displayUV (){
-      
+// UV Index API
       $.ajax({
         url: "https://api.openweathermap.org/data/2.5/uvi?" + APIKey + "&lat=" + lat + "&lon=" + lon,
         method: "GET",
@@ -66,14 +64,146 @@ function displayCityWeather(){
         console.log(uv);
 
       });
-    
+//Forecast API   
       $.ajax({
         url: forecastURL + "&units=imperial",
         method: "GET",
       })
       .then(function (fc){
+        var iconURL = "http://openweathermap.org/img/wn/";
+        var weathercond = fc.list[2].weather[0].main;
+        var weathercond2 = fc.list[10].weather[0].main;
+        var weathercond3 = fc.list[18].weather[0].main;
+        var weathercond4 = fc.list[26].weather[0].main;
+        var weathercond5 = fc.list[34].weather[0].main;
 
         console.log(fc);
+        //for loop if I have time, with datecounter increasing by 8
+        $("#date1").text(fc.list[2].dt_txt);
+        if (weathercond == "Clear"){
+          $("#fcimg1").attr("src", iconURL + "01d.png");
+        }
+        else if (weathercond == "Clouds"){
+          $("#fcimg1").attr("src", iconURL + "03d.png");
+        }
+        else if (weathercond == "Thunderstorm"){
+          $("#fcimg1").attr("src", iconURL + "11d.png");
+        }
+        else if (weathercond == "Drizzle"){
+          $("#fcimg1").attr("src", iconURL + "09d.png");
+        }
+        else if (weathercond == "Rain"){
+          $("#fcimg1").attr("src", iconURL + "10d.png");
+        }
+        else if (weathercond == "Snow"){
+          $("#fcimg1").attr("src", iconURL + "13d.png");
+        }
+        else {
+          $("#fcimg1").attr("src", iconURL + "50d.png");
+        }
+        $("#fctemp1").text('Temp: ' + fc.list[2].main.temp + "F");
+        $("#fchumidity1").text('Humidity: ' + fc.list[2].main.humidity + "%");
+        
+        $("#date2").text(fc.list[10].dt_txt);
+        if (weathercond2 == "Clear"){
+          $("#fcimg2").attr("src", iconURL + "01d.png");
+        }
+        else if (weathercond2 == "Clouds"){
+          $("#fcimg2").attr("src", iconURL + "03d.png");
+        }
+        else if (weathercond2 == "Thunderstorm"){
+          $("#fcimg2").attr("src", iconURL + "11d.png");
+        }
+        else if (weathercond2 == "Drizzle"){
+          $("#fcimg2").attr("src", iconURL + "09d.png");
+        }
+        else if (weathercond2 == "Rain"){
+          $("#fcimg2").attr("src", iconURL + "10d.png");
+        }
+        else if (weathercond2 == "Snow"){
+          $("#fcimg2").attr("src", iconURL + "13d.png");
+        }
+        else {
+          $("#fcimg2").attr("src", iconURL + "50d.png");
+        }
+        $("#fctemp2").text('Temp: ' + fc.list[10].main.temp + "F");
+        $("#fchumidity2").text('Humidity: ' + fc.list[10].main.humidity + "%");
+
+        $("#date3").text(fc.list[18].dt_txt);
+        if (weathercond3 == "Clear"){
+          $("#fcimg3").attr("src", iconURL + "01d.png");
+        }
+        else if (weathercond3 == "Clouds"){
+          $("#fcimg3").attr("src", iconURL + "03d.png");
+        }
+        else if (weathercond3 == "Thunderstorm"){
+          $("#fcimg3").attr("src", iconURL + "11d.png");
+        }
+        else if (weathercond3 == "Drizzle"){
+          $("#fcimg3").attr("src", iconURL + "09d.png");
+        }
+        else if (weathercond3 == "Rain"){
+          $("#fcimg3").attr("src", iconURL + "10d.png");
+        }
+        else if (weathercond3 == "Snow"){
+          $("#fcimg3").attr("src", iconURL + "13d.png");
+        }
+        else {
+          $("#fcimg3").attr("src", iconURL + "50d.png");
+        }
+        $("#fctemp3").text('Temp: ' + fc.list[18].main.temp + "F");
+        $("#fchumidity3").text('Humidity: ' + fc.list[18].main.humidity + "%");
+
+        $("#date4").text(fc.list[26].dt_txt);
+        if (weathercond4 == "Clear"){
+          $("#fcimg4").attr("src", iconURL + "01d.png");
+        }
+        else if (weathercond4 == "Clouds"){
+          $("#fcimg4").attr("src", iconURL + "03d.png");
+        }
+        else if (weathercond4 == "Thunderstorm"){
+          $("#fcimg4").attr("src", iconURL + "11d.png");
+        }
+        else if (weathercond4 == "Drizzle"){
+          $("#fcimg4").attr("src", iconURL + "09d.png");
+        }
+        else if (weathercond4 == "Rain"){
+          $("#fcimg4").attr("src", iconURL + "10d.png");
+        }
+        else if (weathercond4 == "Snow"){
+          $("#fcimg4").attr("src", iconURL + "13d.png");
+        }
+        else {
+          $("#fcimg4").attr("src", iconURL + "50d.png");
+        }
+        $("#fctemp4").text('Temp: ' + fc.list[26].main.temp + "F");
+        $("#fchumidity4").text('Humidity: ' + fc.list[26].main.humidity + "%");
+
+        $("#date5").text(fc.list[34].dt_txt);
+        if (weathercond5 == "Clear"){
+          $("#fcimg5").attr("src", iconURL + "01d.png");
+        }
+        else if (weathercond5 == "Clouds"){
+          $("#fcimg5").attr("src", iconURL + "03d.png");
+        }
+        else if (weathercond5 == "Thunderstorm"){
+          $("#fcimg5").attr("src", iconURL + "11d.png");
+        }
+        else if (weathercond5 == "Drizzle"){
+          $("#fcimg5").attr("src", iconURL + "09d.png");
+        }
+        else if (weathercond5 == "Rain"){
+          $("#fcimg5").attr("src", iconURL + "10d.png");
+        }
+        else if (weathercond5 == "Snow"){
+          $("#fcimg5").attr("src", iconURL + "13d.png");
+        }
+        else {
+          $("#fcimg5").attr("src", iconURL + "50d.png");
+        }
+        $("#fctemp5").text('Temp: ' + fc.list[34].main.temp + "F");
+        $("#fchumidity5").text('Humidity: ' + fc.list[34].main.humidity + "%");
+
 
       });
     }
