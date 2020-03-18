@@ -1,10 +1,23 @@
 // This is our API key
 var APIKey = "&appid=ea5dcc62ea693e8b6f985f5c67ba8824";
 
-  
-    
+var cities = [];
 
-    var cities = [];
+init();
+
+function init() {
+
+  var storedCities = JSON.parse(localStorage.getItem("cities"));
+
+  if (storedCities !== null){
+    cities = storedCities;
+  }
+  renderButtons();
+}
+
+function storeCities() {
+  localStorage.setItem("cities", JSON.stringify(cities));
+}
 
 function displayCityWeather(){
     
@@ -78,7 +91,8 @@ function displayCityWeather(){
         var weathercond5 = fc.list[34].weather[0].main;
 
         console.log(fc);
-        //for loop if I have time, with datecounter increasing by 8
+
+        //Add for loop if I have time, with datecounter increasing by 8
         $("#date1").text(fc.list[2].dt_txt);
         if (weathercond == "Clear"){
           $("#fcimg1").attr("src", iconURL + "01d.png");
@@ -229,6 +243,7 @@ $("#searchBtn").on("click", function(e){
     cities.push(city);
     displayCityWeather();
     renderButtons();
+    storeCities();
     // displayUV();
 });
 
