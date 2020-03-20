@@ -1,0 +1,11 @@
+#clear{
+    color: orange;
+    font-weight: bold;
+}
+img{
+    height: 100px;
+    width: 100px;
+}
+.orange{
+    background-color: orange;
+}

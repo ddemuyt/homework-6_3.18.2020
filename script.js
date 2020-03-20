@@ -69,14 +69,29 @@ function displayCityWeather(){
       $.ajax({
         url: "https://api.openweathermap.org/data/2.5/uvi?" + APIKey + "&lat=" + lat + "&lon=" + lon,
         method: "GET",
-      })
       
-      .then(function (uv){
       
-        $("#uv").html('UV Index: <span id="uv">' + uv.value + "</span>");
-        console.log(uv);
+      success: function (uv){
 
-      });
+      console.log(uv.value);
+        
+      if (uv.value <= 2.5){
+        $("#uv").html('UV Index: <span class="bg-success text-white">' + uv.value + "</span>");
+      }
+      else if (2.5 < uv.value >= 5.5){
+        $("#uv").html('UV Index: <span class="bg-warning">' + uv.value + "</span>");
+      }
+      else if (5.5 < uv.value >= 7.5){
+        $("#uv").html('UV Index: <span class="bg-orange text-white">' + uv.value + "</span>");
+      }
+      else if (7.5 < uv.value >= 10.5){
+        $("#uv").html('UV Index: <span class="bg-danger text-white">' + uv.value + "</span>");
+      }
+      else {
+        $("#uv").html('UV Index: <span class="bg-dark text-white">' + uv.value + "</span>");
+      }
+    }
+  });
 //Forecast API   
       $.ajax({
         url: forecastURL + "&units=imperial",
@@ -95,125 +110,125 @@ function displayCityWeather(){
         //Add for loop if I have time, with datecounter increasing by 8
         $("#date1").text(fc.list[2].dt_txt);
         if (weathercond == "Clear"){
-          $("#fcimg1").attr("src", iconURL + "01d.png");
+          $("#fcimg1").attr("src", iconURL + "01d@2x.png");
         }
         else if (weathercond == "Clouds"){
-          $("#fcimg1").attr("src", iconURL + "03d.png");
+          $("#fcimg1").attr("src", iconURL + "03d@2x.png");
         }
         else if (weathercond == "Thunderstorm"){
-          $("#fcimg1").attr("src", iconURL + "11d.png");
+          $("#fcimg1").attr("src", iconURL + "11d@2x.png");
         }
         else if (weathercond == "Drizzle"){
-          $("#fcimg1").attr("src", iconURL + "09d.png");
+          $("#fcimg1").attr("src", iconURL + "09d@2x.png");
         }
         else if (weathercond == "Rain"){
-          $("#fcimg1").attr("src", iconURL + "10d.png");
+          $("#fcimg1").attr("src", iconURL + "10d@2x.png");
         }
         else if (weathercond == "Snow"){
-          $("#fcimg1").attr("src", iconURL + "13d.png");
+          $("#fcimg1").attr("src", iconURL + "13d@2x.png");
         }
         else {
-          $("#fcimg1").attr("src", iconURL + "50d.png");
+          $("#fcimg1").attr("src", iconURL + "50d@2x.png");
         }
         $("#fctemp1").text('Temp: ' + fc.list[2].main.temp + "F");
         $("#fchumidity1").text('Humidity: ' + fc.list[2].main.humidity + "%");
         
         $("#date2").text(fc.list[10].dt_txt);
         if (weathercond2 == "Clear"){
-          $("#fcimg2").attr("src", iconURL + "01d.png");
+          $("#fcimg2").attr("src", iconURL + "01d@2x.png");
         }
         else if (weathercond2 == "Clouds"){
-          $("#fcimg2").attr("src", iconURL + "03d.png");
+          $("#fcimg2").attr("src", iconURL + "03d@2x.png");
         }
         else if (weathercond2 == "Thunderstorm"){
-          $("#fcimg2").attr("src", iconURL + "11d.png");
+          $("#fcimg2").attr("src", iconURL + "11d@2x.png");
         }
         else if (weathercond2 == "Drizzle"){
-          $("#fcimg2").attr("src", iconURL + "09d.png");
+          $("#fcimg2").attr("src", iconURL + "09d@2x.png");
         }
         else if (weathercond2 == "Rain"){
-          $("#fcimg2").attr("src", iconURL + "10d.png");
+          $("#fcimg2").attr("src", iconURL + "10d@2x.png");
         }
         else if (weathercond2 == "Snow"){
-          $("#fcimg2").attr("src", iconURL + "13d.png");
+          $("#fcimg2").attr("src", iconURL + "13d@2x.png");
         }
         else {
-          $("#fcimg2").attr("src", iconURL + "50d.png");
+          $("#fcimg2").attr("src", iconURL + "50d@2x.png");
         }
         $("#fctemp2").text('Temp: ' + fc.list[10].main.temp + "F");
         $("#fchumidity2").text('Humidity: ' + fc.list[10].main.humidity + "%");
 
         $("#date3").text(fc.list[18].dt_txt);
         if (weathercond3 == "Clear"){
-          $("#fcimg3").attr("src", iconURL + "01d.png");
+          $("#fcimg3").attr("src", iconURL + "01d@2x.png");
         }
         else if (weathercond3 == "Clouds"){
-          $("#fcimg3").attr("src", iconURL + "03d.png");
+          $("#fcimg3").attr("src", iconURL + "03d@2x.png");
         }
         else if (weathercond3 == "Thunderstorm"){
-          $("#fcimg3").attr("src", iconURL + "11d.png");
+          $("#fcimg3").attr("src", iconURL + "11d@2x.png");
         }
         else if (weathercond3 == "Drizzle"){
-          $("#fcimg3").attr("src", iconURL + "09d.png");
+          $("#fcimg3").attr("src", iconURL + "09d@2x.png");
         }
         else if (weathercond3 == "Rain"){
-          $("#fcimg3").attr("src", iconURL + "10d.png");
+          $("#fcimg3").attr("src", iconURL + "10d@2x.png");
         }
         else if (weathercond3 == "Snow"){
-          $("#fcimg3").attr("src", iconURL + "13d.png");
+          $("#fcimg3").attr("src", iconURL + "13d@2x.png");
         }
         else {
-          $("#fcimg3").attr("src", iconURL + "50d.png");
+          $("#fcimg3").attr("src", iconURL + "50d@2x.png");
         }
         $("#fctemp3").text('Temp: ' + fc.list[18].main.temp + "F");
         $("#fchumidity3").text('Humidity: ' + fc.list[18].main.humidity + "%");
 
         $("#date4").text(fc.list[26].dt_txt);
         if (weathercond4 == "Clear"){
-          $("#fcimg4").attr("src", iconURL + "01d.png");
+          $("#fcimg4").attr("src", iconURL + "01d@2x.png");
         }
         else if (weathercond4 == "Clouds"){
-          $("#fcimg4").attr("src", iconURL + "03d.png");
+          $("#fcimg4").attr("src", iconURL + "03d@2x.png");
         }
         else if (weathercond4 == "Thunderstorm"){
-          $("#fcimg4").attr("src", iconURL + "11d.png");
+          $("#fcimg4").attr("src", iconURL + "11d@2x.png");
         }
         else if (weathercond4 == "Drizzle"){
-          $("#fcimg4").attr("src", iconURL + "09d.png");
+          $("#fcimg4").attr("src", iconURL + "09d@2x.png");
         }
         else if (weathercond4 == "Rain"){
-          $("#fcimg4").attr("src", iconURL + "10d.png");
+          $("#fcimg4").attr("src", iconURL + "10d@2x.png");
         }
         else if (weathercond4 == "Snow"){
-          $("#fcimg4").attr("src", iconURL + "13d.png");
+          $("#fcimg4").attr("src", iconURL + "13d@2x.png");
         }
         else {
-          $("#fcimg4").attr("src", iconURL + "50d.png");
+          $("#fcimg4").attr("src", iconURL + "50d@2x.png");
         }
         $("#fctemp4").text('Temp: ' + fc.list[26].main.temp + "F");
         $("#fchumidity4").text('Humidity: ' + fc.list[26].main.humidity + "%");
 
         $("#date5").text(fc.list[34].dt_txt);
         if (weathercond5 == "Clear"){
-          $("#fcimg5").attr("src", iconURL + "01d.png");
+          $("#fcimg5").attr("src", iconURL + "01d@2x.png");
         }
         else if (weathercond5 == "Clouds"){
-          $("#fcimg5").attr("src", iconURL + "03d.png");
+          $("#fcimg5").attr("src", iconURL + "03d@2x.png");
         }
         else if (weathercond5 == "Thunderstorm"){
-          $("#fcimg5").attr("src", iconURL + "11d.png");
+          $("#fcimg5").attr("src", iconURL + "11d@2x.png");
         }
         else if (weathercond5 == "Drizzle"){
-          $("#fcimg5").attr("src", iconURL + "09d.png");
+          $("#fcimg5").attr("src", iconURL + "09d@2x.png");
         }
         else if (weathercond5 == "Rain"){
-          $("#fcimg5").attr("src", iconURL + "10d.png");
+          $("#fcimg5").attr("src", iconURL + "10d@2x.png");
         }
         else if (weathercond5 == "Snow"){
-          $("#fcimg5").attr("src", iconURL + "13d.png");
+          $("#fcimg5").attr("src", iconURL + "13d@2x.png");
         }
         else {
-          $("#fcimg5").attr("src", iconURL + "50d.png");
+          $("#fcimg5").attr("src", iconURL + "50d@2x.png");
         }
         $("#fctemp5").text('Temp: ' + fc.list[34].main.temp + "F");
         $("#fchumidity5").text('Humidity: ' + fc.list[34].main.humidity + "%");
@@ -229,10 +244,10 @@ function renderButtons() {
 
     for (var i = 0; i < cities.length; i++){
         var c = $("<button>");
-        c.addClass("city btn");
+        c.addClass("city btn bg-white btn-block border");
         c.attr("city-name", cities[i]);
         c.text(cities[i]);
-        $("#cityBtns").append(c);
+        $("#cityBtns").prepend(c);
     }
 
 };
@@ -244,10 +259,25 @@ $("#searchBtn").on("click", function(e){
     displayCityWeather();
     renderButtons();
     storeCities();
-    // displayUV();
+    if ($("#forecast").attr("class") === "d-none"){
+      $("#forecast").removeClass("d-none");
+      $("#forecast").addClass("d-block");
+    }
 });
 
 $(document).on("click", ".city", displayCityWeather);
+$(document).on("click", ".city", function(){
+  if ($("#forecast").attr("class") === "d-none"){
+    $("#forecast").removeClass("d-none");
+    $("#forecast").addClass("d-block");
+  }
+});
+
+$("#clear").on("click", function(){
+  $("#cityBtns").empty();
+  cities = [];
+  localStorage.clear();
+});
 // $(document).on("click", ".city", displayUV);
 
 renderButtons();
