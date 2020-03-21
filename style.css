@@ -9,3 +9,6 @@ img{
 .orange{
     background-color: orange;
 }
+.card-title{
+    font-weight: bold;
+}

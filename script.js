@@ -25,9 +25,10 @@ function displayCityWeather(){
   var lon = "";
 
     // Here we are building the URL we need to query the database
-    var cityInput = $(this).attr("city-name");
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + APIKey;
-    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + APIKey;
+    var btnInput = $(this).attr("city-name");
+    var searchInput = "";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?appid=ea5dcc62ea693e8b6f985f5c67ba8824&q=" + btnInput ;
+    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?appid=ea5dcc62ea693e8b6f985f5c67ba8824&q=" + btnInput ;
 
     console.log(queryURL);
 
@@ -43,7 +44,8 @@ function displayCityWeather(){
         console.log(response);
         
         // Transfer content to HTML
-        $("#city").text(response.name + " Weather Details");
+        var currentDate = new Date(response.dt * 1000)
+        $("#city").text(response.name + " (" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + "/" + currentDate.getFullYear() + ") ");
         $("#wind").text("Wind Speed: " + response.wind.speed + " MPH");
         $("#humidity").text("Humidity: " + response.main.humidity + "%");
         
@@ -53,6 +55,8 @@ function displayCityWeather(){
         console.log(response.coord.lat);
         console.log(response.coord.lon);
         
+        
+
         
         // Convert the temp to fahrenheit
         var tempF = (response.main.temp - 273.15) * 1.80 + 32;
@@ -78,13 +82,13 @@ function displayCityWeather(){
       if (uv.value <= 2.5){
         $("#uv").html('UV Index: <span class="bg-success text-white">' + uv.value + "</span>");
       }
-      else if (2.5 < uv.value >= 5.5){
+      else if (uv.value > 2.5  && uv.value <= 5.5){
         $("#uv").html('UV Index: <span class="bg-warning">' + uv.value + "</span>");
       }
-      else if (5.5 < uv.value >= 7.5){
+      else if (uv.value > 5.5 && uv.value <= 7.5){
         $("#uv").html('UV Index: <span class="bg-orange text-white">' + uv.value + "</span>");
       }
-      else if (7.5 < uv.value >= 10.5){
+      else if (uv.value > 7.5 && uv.value <= 10.5){
         $("#uv").html('UV Index: <span class="bg-danger text-white">' + uv.value + "</span>");
       }
       else {
@@ -108,7 +112,31 @@ function displayCityWeather(){
         console.log(fc);
 
         //Add for loop if I have time, with datecounter increasing by 8
-        $("#date1").text(fc.list[2].dt_txt);
+        var currentWC = response.weather.main;
+        if (currentWC == "Clear"){
+          $("#currentimg").attr("src", iconURL + "01d@2x.png");
+        }
+        else if (currentWC == "Clouds"){
+          $("#currentimg").attr("src", iconURL + "03d@2x.png");
+        }
+        else if (currentWC == "Thunderstorm"){
+          $("#currentimg").attr("src", iconURL + "11d@2x.png");
+        }
+        else if (currentWC == "Drizzle"){
+          $("#currentimg").attr("src", iconURL + "09d@2x.png");
+        }
+        else if (currentWC == "Rain"){
+          $("#currentimg").attr("src", iconURL + "10d@2x.png");
+        }
+        else if (currentWC == "Snow"){
+          $("#currentimg").attr("src", iconURL + "13d@2x.png");
+        }
+        else {
+          $("#currentimg").attr("src", iconURL + "50d@2x.png");
+        }
+
+        var date1 = new Date(fc.list[2].dt * 1000)
+        $("#date1").text((date1.getMonth() + 1) + "/" + date1.getDate() + "/" + date1.getFullYear());
         if (weathercond == "Clear"){
           $("#fcimg1").attr("src", iconURL + "01d@2x.png");
         }
@@ -133,7 +161,8 @@ function displayCityWeather(){
         $("#fctemp1").text('Temp: ' + fc.list[2].main.temp + "F");
         $("#fchumidity1").text('Humidity: ' + fc.list[2].main.humidity + "%");
         
-        $("#date2").text(fc.list[10].dt_txt);
+        var date2 = new Date(fc.list[10].dt * 1000)
+        $("#date2").text((date2.getMonth() + 1) + "/" + date2.getDate() + "/" + date2.getFullYear());
         if (weathercond2 == "Clear"){
           $("#fcimg2").attr("src", iconURL + "01d@2x.png");
         }
@@ -158,7 +187,8 @@ function displayCityWeather(){
         $("#fctemp2").text('Temp: ' + fc.list[10].main.temp + "F");
         $("#fchumidity2").text('Humidity: ' + fc.list[10].main.humidity + "%");
 
-        $("#date3").text(fc.list[18].dt_txt);
+        var date3 = new Date(fc.list[18].dt * 1000)
+        $("#date3").text((date3.getMonth() + 1) + "/" + date3.getDate() + "/" + date3.getFullYear());
         if (weathercond3 == "Clear"){
           $("#fcimg3").attr("src", iconURL + "01d@2x.png");
         }
@@ -183,7 +213,8 @@ function displayCityWeather(){
         $("#fctemp3").text('Temp: ' + fc.list[18].main.temp + "F");
         $("#fchumidity3").text('Humidity: ' + fc.list[18].main.humidity + "%");
 
-        $("#date4").text(fc.list[26].dt_txt);
+        var date4 = new Date(fc.list[26].dt * 1000)
+        $("#date4").text((date4.getMonth() + 1) + "/" + date4.getDate() + "/" + date4.getFullYear());
         if (weathercond4 == "Clear"){
           $("#fcimg4").attr("src", iconURL + "01d@2x.png");
         }
@@ -208,7 +239,8 @@ function displayCityWeather(){
         $("#fctemp4").text('Temp: ' + fc.list[26].main.temp + "F");
         $("#fchumidity4").text('Humidity: ' + fc.list[26].main.humidity + "%");
 
-        $("#date5").text(fc.list[34].dt_txt);
+        var date5 = new Date(fc.list[34].dt * 1000)
+        $("#date5").text((date5.getMonth() + 1) + "/" + date5.getDate() + "/" + date5.getFullYear());
         if (weathercond5 == "Clear"){
           $("#fcimg5").attr("src", iconURL + "01d@2x.png");
         }
@@ -255,6 +287,7 @@ function renderButtons() {
 $("#searchBtn").on("click", function(e){
     e.preventDefault();
     var city = $("#search").val().trim();
+    searchInput = city; 
     cities.push(city);
     displayCityWeather();
     renderButtons();
@@ -278,6 +311,8 @@ $("#clear").on("click", function(){
   cities = [];
   localStorage.clear();
 });
-// $(document).on("click", ".city", displayUV);
 
 renderButtons();
+
+//if search button is pressed, query + search, run all functions
+//else if city buttons are pressed. query + button, run all functions
