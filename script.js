@@ -19,22 +19,25 @@ function storeCities() {
   localStorage.setItem("cities", JSON.stringify(cities));
 }
 
+    var searchInput = "";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?appid=ea5dcc62ea693e8b6f985f5c67ba8824&q="
+    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?appid=ea5dcc62ea693e8b6f985f5c67ba8824&q="
+    var fullURL = "";
+    var fullFCURL = "";
+
 function displayCityWeather(){
     
   var lat = "";
   var lon = "";
 
     // Here we are building the URL we need to query the database
-    var btnInput = $(this).attr("city-name");
-    var searchInput = "";
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?appid=ea5dcc62ea693e8b6f985f5c67ba8824&q=" + btnInput ;
-    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?appid=ea5dcc62ea693e8b6f985f5c67ba8824&q=" + btnInput ;
-
+   
     console.log(queryURL);
+    var btnInput = $(this).attr("city-name");
 
     //OpenWeatherMap API
     $.ajax({
-      url: queryURL,
+      url: fullURL,
       method: "GET",
     
       // Using success to dictate the order of AJAX calls
@@ -98,7 +101,7 @@ function displayCityWeather(){
   });
 //Forecast API   
       $.ajax({
-        url: forecastURL + "&units=imperial",
+        url: fullFCURL + "&units=imperial",
         method: "GET",
       })
       .then(function (fc){
@@ -287,7 +290,11 @@ function renderButtons() {
 $("#searchBtn").on("click", function(e){
     e.preventDefault();
     var city = $("#search").val().trim();
-    searchInput = city; 
+    searchInput = city;
+    fullURL = "";
+    fullFCURL = ""; 
+    fullURL = queryURL + searchInput;
+    fullFCURL = forecastURL + searchInput;
     cities.push(city);
     displayCityWeather();
     renderButtons();
@@ -300,6 +307,10 @@ $("#searchBtn").on("click", function(e){
 
 $(document).on("click", ".city", displayCityWeather);
 $(document).on("click", ".city", function(){
+  fullURL = "";
+  fullFCURL = "";  
+  fullURL = queryURL + btnInput;
+  fullFCURL = forecastURL + btnInput;
   if ($("#forecast").attr("class") === "d-none"){
     $("#forecast").removeClass("d-none");
     $("#forecast").addClass("d-block");
