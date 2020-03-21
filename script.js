@@ -32,8 +32,8 @@ function displayCityWeather(){
 
     // Here we are building the URL we need to query the database
    
-    console.log(queryURL);
-    var btnInput = $(this).attr("city-name");
+    console.log(fullURL);
+    console.log(fullFCURL);
 
     //OpenWeatherMap API
     $.ajax({
@@ -115,7 +115,7 @@ function displayCityWeather(){
         console.log(fc);
 
         //Add for loop if I have time, with datecounter increasing by 8
-        var currentWC = response.weather.main;
+        var currentWC = response.weather[0].main;
         if (currentWC == "Clear"){
           $("#currentimg").attr("src", iconURL + "01d@2x.png");
         }
@@ -305,12 +305,14 @@ $("#searchBtn").on("click", function(e){
     }
 });
 
-$(document).on("click", ".city", displayCityWeather);
 $(document).on("click", ".city", function(){
+  
+  var btnInput = $(this).attr("city-name");
   fullURL = "";
   fullFCURL = "";  
   fullURL = queryURL + btnInput;
   fullFCURL = forecastURL + btnInput;
+  displayCityWeather();
   if ($("#forecast").attr("class") === "d-none"){
     $("#forecast").removeClass("d-none");
     $("#forecast").addClass("d-block");
@@ -321,6 +323,17 @@ $("#clear").on("click", function(){
   $("#cityBtns").empty();
   cities = [];
   localStorage.clear();
+  //Potential Clear Current City Btn:
+  // $("#city").text("Please Select a City");
+  // $("#currentimg").attr("src", "");
+  // $("#temp").text("");
+  // $("#humidity").text("");
+  // $("#wind").text("");
+  // $("#uv").text("");
+  // if ($("#forecast").attr("class") === "d-block"){
+  //   $("#forecast").removeClass("d-block");
+  //   $("#forecast").addClass("d-none");
+  // }
 });
 
 renderButtons();
