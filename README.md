@@ -7,24 +7,24 @@ Weather Dashboard using jQuery, CSS Bootstrap, and Open Weather API.
 <br>
 <p>The page is set up fairly straight forward. Enter a city's name in the search box and either hit Enter or click the Search button. This will send the AJAx call to Open Weather API, gather the current weather for that city, and display it in the card to the right hand side.</p>
 <br>
-<img src="./Assets/wd_blank">
+<img src="./Assets/wd_blank.png">
 <br>
 <b>When a city is search:</b>
-<img src="./Assets/wd_citysearched">
+<img src="./Assets/wd_citysearched.png">
 <br>
 <p> After a city is searched, a button is created with the search input displayed. These buttons are locally stored and will rerun the function to retrieve the city's weather data when clicked. Also, notice the UV Index's span changes color depending on how high the measurement is.</p>
 <br>
-<img src="./Assets/wd_citybuttonselected">
+<img src="./Assets/wd_citybuttonselected.png">
 <br>
 <p>I have also added a button to clear the search history (the city buttons) and remove them from localstorage. This is just to have a clean application and friendly user interface.</p>
 <br>
 <b>Before the Clear button is clicked:</b>
-<img src="./Assets/wd_citydiv-beforeclear">
+<img src="./Assets/wd_citydiv-beforeclear.png">
 <br>
 <b>After the Clear button is clicked:</b>
-<img src="./Assets/wd_citydiv-afterclear">
+<img src="./Assets/wd_citydiv-afterclear.png">
 <br>
-<p>Overall, this project came out quite nicely. The functionality is smooth, images and data is displayed dyynamically, and the design is near perfect. There are areas withing the Javascript file where added tools may have made for easier, more efficient, or errorless code, but I will focus on cleaning that up later.
+<p>Overall, this project came out quite nicely. The functionality is smooth, images and data are displayed dyynamically, and the responsive design is near perfect. There are areas withing the Javascript file where added tools may have made for easier, more efficient, or errorless code, but I will focus on cleaning that up later.
 <hr>
 <br>
 ## License
