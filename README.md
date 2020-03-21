@@ -9,7 +9,7 @@ Weather Dashboard using jQuery, CSS Bootstrap, and Open Weather API.
 <br>
 <img src="./Assets/wd_blank.png">
 <br>
-<b>When a city is search:</b>
+<b>When a city is searched:</b>
 <img src="./Assets/wd_citysearched.png">
 <br>
 <p> After a city is searched, a button is created with the search input displayed. These buttons are locally stored and will rerun the function to retrieve the city's weather data when clicked. Also, notice the UV Index's span changes color depending on how high the measurement is.</p>
